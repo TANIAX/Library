@@ -71,17 +71,30 @@ function getUserById($id) {
     return $donnees;
 }
 
-function updateUserWithAdress($login, $password,$mail,$adresse,$id){
+function updateUser($login, $password,$mail,$adresse,$id,$role){
   $bdd = getDb();
+  if (!empty($adresse)) {
+    $req = $bdd->prepare('UPDATE users SET user_login = :login, user_password = :password, user_email = :mail ,user_adresse = :adresse, user_role =:role WHERE user_id = :id ');
+    $req->execute(array(
+    	'login' => $login,
+    	'password' => $password,
+    	'mail' => $mail,
+      'adresse' => $adresse,
+      'id' => $id,
+      'role' => $role
+    	));
+      }
 
-  $req = $bdd->prepare('UPDATE users SET user_login = :login, user_password = :password, user_email = :mail ,user_adresse = :adresse, WHERE user_id = :id ');
-  $req->execute(array(
-  	'login' => $login,
-  	'password' => $password,
-  	'mail' => $mail,
-    'adresse' => $adresse,
-    'id' => $id
-  	));
-    }
-
+  else {
+    $req = $bdd->prepare('UPDATE users SET user_login = :login, user_password = :password, user_email = :mail ,user_adresse = :adresse, user_role =:role WHERE user_id = :id ');
+    $req->execute(array(
+    	'login' => $login,
+    	'password' => $password,
+    	'mail' => $mail,
+      'adresse' => '',
+      'id' => $id,
+      'role' => $role
+    	));
+      }
+  }
 ?>

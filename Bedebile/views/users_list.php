@@ -22,7 +22,7 @@ ob_start();?>
             <td><?php if($user['user_role']==1){echo "Admin";}else {echo "Membre";}?></td>
             <td>
                 <div class="button-container">
-                    <form action="edit_user">
+                    <form action="list_user">
                         <input type="hidden" name="id" value=<?=$user['user_id']?>>
                         <button class="btn btn-outline-success" type="submit">Editer</button>
                     </form>

@@ -10,25 +10,27 @@ if(!empty($_POST['login_update']) && !empty($_POST['password_update']) && !empty
          $mail = $_POST['email_update'];
          $adresse = $_POST['adresse_update'];
          $id = $_POST['id_update'];
-         if (empty($id)) {
-           echo "empty id";
-         }
+         $role = $_POST['role_update'];
 
          $exists = ExistLoginOrEmail($login,$mail);
          if ($exists) {
+           if (($_POST['login_update'] === $_POST['login_update_default']) || ($_POST['email_update'] === $_POST['email_update_default'] && !empty($adresse)) ) {goto continue_;}
            echo "Changer e mail et login";//TODO Afficher un message d'erreur + exeception si pas de changement de login ou mail
          }
          elseif(!empty($adresse)) {
            //Transmission des variables à la base de données.
-           updateUserWithAdress($login, $password,$mail,$adresse,$id);
+           continue_:
+           updateUser($login, $password,$mail,$adresse,$id,$role);
            header('Location: welcome');
            exit();
          }
-         else {
-           updateUser($login, $password,$mail,$id);
-           header('Location: welcome');
-           exit();
-         }
+
      }
+     else {
+       // TODO: Afficher erreur mot de passe non correspondant
+     }
+   }
+   else {
+     // TODO: Afficher une erreur de champs requis non rempli
    }
 ?>
