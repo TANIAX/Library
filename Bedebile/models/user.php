@@ -10,6 +10,16 @@ function getUser($login) {
     $reponse->closeCursor(); // Termine le traitement de la requête
     return $donnees;
 }
+
+function getUserByMail($email) {
+    $bdd = getDb();
+    $reponse = $bdd->prepare('SELECT user_email FROM users WHERE user_email = :email');
+    $reponse->execute(array('email' => $email));
+    $donnees = $reponse->fetch();
+    $reponse->closeCursor(); // Termine le traitement de la requête
+    return $donnees;
+}
+
 function getUsers() {
     $bdd = getDb();
     $reponse = $bdd->query('SELECT * FROM users');
@@ -35,6 +45,7 @@ function newUser($login,$password,$mail){
   $query = "INSERT INTO users (user_login , user_password , user_email, user_role) VALUES('$login' , '$password' , '$mail', '2')";
   $transaction = $bdd->prepare($query); // Faire cela s'appele une transaction.
   $transaction->execute();
+  return $transaction;
   }
 
 
@@ -73,7 +84,7 @@ function getUserById($id) {
 
 function updateUser($login, $password,$mail,$adresse,$id,$role){
   $bdd = getDb();
-  if (!empty($adresse)) {
+  if (!empty($adresse) && $login != 'nochange' && $mail != 'nochange') {
     $req = $bdd->prepare('UPDATE users SET user_login = :login, user_password = :password, user_email = :mail ,user_adresse = :adresse, user_role =:role WHERE user_id = :id ');
     $req->execute(array(
     	'login' => $login,
@@ -83,18 +94,39 @@ function updateUser($login, $password,$mail,$adresse,$id,$role){
       'id' => $id,
       'role' => $role
     	));
-      }
-
-  else {
-    $req = $bdd->prepare('UPDATE users SET user_login = :login, user_password = :password, user_email = :mail ,user_adresse = :adresse, user_role =:role WHERE user_id = :id ');
+  }
+  elseif (!empty($adresse) && $login == 'nochange' && $mail == 'nochange') {
+    $req = $bdd->prepare('UPDATE users SET user_password = :password, user_adresse = :adresse, user_role =:role WHERE user_id = :id ');
     $req->execute(array(
-    	'login' => $login,
     	'password' => $password,
-    	'mail' => $mail,
-      'adresse' => '',
+      'adresse' => $adresse,
       'id' => $id,
       'role' => $role
     	));
+  }
+
+  elseif (empty($adresse) && $login == 'nochange' && $mail == 'nochange'){
+      $req = $bdd->prepare('UPDATE users SET user_password = :password, user_adresse = :adresse, user_role =:role WHERE user_id = :id ');
+      $req->execute(array(
+      	'password' => $password,
+        'adresse' => '',
+        'id' => $id,
+        'role' => $role
+      	));
+      }
+      elseif (empty($adresse) && $login != 'nochange' && $mail != 'nochange') {
+        $req = $bdd->prepare('UPDATE users SET user_login = :login, user_password = :password, user_email = :mail ,user_adresse = :adresse, user_role =:role WHERE user_id = :id ');
+        $req->execute(array(
+        	'login' => $login,
+        	'password' => $password,
+        	'mail' => $mail,
+          'adresse' => '',
+          'id' => $id,
+          'role' => $role
+        	));
+      }
+      else {
+        echo "Erreur inconnue";
       }
   }
 ?>

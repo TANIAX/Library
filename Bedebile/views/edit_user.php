@@ -1,5 +1,7 @@
 <?php ob_start(); ?>
 <div class="updateuser">
+  <?=$ERROR["UPDATEUSER"];?>
+  <?=$SUCCES["UPDATEUSER"];?>
   <form  action="update_user" method="post">
     <input hidden type="text" name="id_update" value="<?=$user['user_id']?>"><br>
     <br><p>Login:</p>
@@ -19,7 +21,7 @@
       <option value="2">Membre</option>
       <option value="1">Admin</option>
     </select></p>
-      <button type="submit" value="Submit">Submit</button>
+      <button type="update-submit" value="Submit">Submit</button>
   </form>
 
 </div>
