@@ -1,18 +1,19 @@
+<h1 id="acceuil"><a href="index">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a></h1>
 <div id="flipkart-navbar">
     <!--<img src="./images/ban.png" alt="company logo" style="width: 100%;">-->
     <div class="container">
         <div class="row row1">
             <ul class="largenav pull-right">
-                <li class="upper-links"><a class="links" href="http://clashhacks.in/">Bande déssinées</a></li>
-                <li class="upper-links"><a class="links" href="https://campusbox.org/">Comics</a></li>
-                <li class="upper-links"><a class="links" href="http://clashhacks.in/">Livres</a></li>
-                <li class="upper-links"><a class="links" href="http://clashhacks.in/">Figurine</a></li>
-                <li class="upper-links"><a class="links" href="http://clashhacks.in/">Mangas</a></li>
-                <li class="upper-links"><a class="links" href="https://campusbox.org/">DVD</a></li>
-                <li class="upper-links"><a class="links" href="http://clashhacks.in/">Jeux de plateaux</a></li>
-                <li class="upper-links"><a class="links" href="http://clashhacks.in/">Jeux de cartes</a></li>
-                <li class="upper-links"><a class="links" href="http://clashhacks.in/">Affiches</a></li>
-                <li class="upper-links"><a class="links" href="http://clashhacks.in/">Divers</a></li>
+                <li class="upper-links"><a class="links" href="<?=URL . 'afficher_article?article_categorie=1'?>">Bande déssinées</a></li>
+                <li class="upper-links"><a class="links" href="<?=URL . 'afficher_article?article_categorie=2'?>">Comics</a></li>
+                <li class="upper-links"><a class="links" href="<?=URL . 'afficher_article?article_categorie=3'?>">Livres</a></li>
+                <li class="upper-links"><a class="links" href="<?=URL . 'afficher_article?article_categorie=4'?>">Figurine</a></li>
+                <li class="upper-links"><a class="links" href="<?=URL . 'afficher_article?article_categorie=5'?>">Mangas</a></li>
+                <li class="upper-links"><a class="links" href="<?=URL . 'afficher_article?article_categorie=6'?>">DVD</a></li>
+                <li class="upper-links"><a class="links" href="<?=URL . 'afficher_article?article_categorie=7'?>">Jeux de plateaux</a></li>
+                <li class="upper-links"><a class="links" href="<?=URL . 'afficher_article?article_categorie=8'?>">Jeux de cartes</a></li>
+                <li class="upper-links"><a class="links" href="<?=URL . 'afficher_article?article_categorie=9'?>">Affiches</a></li>
+                <li class="upper-links"><a class="links" href="<?=URL . 'afficher_article?article_categorie=10'?>">Divers</a></li>
                 <li class="upper-links"></li>
                 <li class="upper-links">
                     <a class="links" href="http://clashhacks.in/">
@@ -42,19 +43,19 @@
         <div class="row row2">
             <div class="col-sm-2">
                 <h2 style="margin:0px;"><span class="smallnav menu" onclick="openNav()">☰ Bédébile</span></h2>
-
+                <!--<h2 style="margin:0px;"><span class="largenav"><a href="index">Acceuil</a></span></h1>-->
             </div>
             <div class="flipkart-navbar-search smallsearch col-sm-8 col-xs-11">
-                <div class="row">
-                  <form class="" action="index.html" method="post">
-                      <input class="flipkart-navbar-input col-xs-11" type="" placeholder="Cherchez votre produit, nom ou référence" name="">
-                      <button class="flipkart-navbar-button col-xs-1">
-                          <svg width="15px" height="15px">
-                              <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
-                          </svg>
-                      </button>
-                  </form>
-                </div>
+              <div class="row">
+                <form class="" action="search" method="get">
+                  <input class="flipkart-navbar-input col-xs-11" type="text" placeholder="Entre le nom de votre produit" name="valeur">
+                  <button class="flipkart-navbar-button col-xs-1" >
+                      <svg width="15px" height="15px">
+                          <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
+                      </svg>
+                  </button>
+                </form>
+              </div>
             </div>
             <div class="cart largenav col-sm-2">
                 <a class="cart-button">

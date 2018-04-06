@@ -51,6 +51,15 @@ if (isset($_POST)) {
         if (!isset($_POST['login_register']) || empty($_POST['login_register'])) { //Pourquoi isset ou empty ?
             $errMsg .= "<li>Login vide</li>";
         }
+        if (!isset($_POST['name_register']) || empty($_POST['name_register'])) {
+            $errMsg .= "<li>Nom vide</li>";
+        }
+        if (!isset($_POST['firstname_register']) || empty($_POST['firstname_register'])) {
+            $errMsg .= "<li>Prénom vide</li>";
+        }
+        if (!isset($_POST['adresse_register']) || empty($_POST['adresse_register'])) {
+            $errMsg .= "<li>Adresse vide</li>";
+        }
         if (!isset($_POST['password_register']) || empty($_POST['password_register'])) {
             $errMsg .= "<li>Password vide</li>";
         }
@@ -76,7 +85,10 @@ if (isset($_POST)) {
             $login = $_POST['login_register'];
             $password = password_hash($_POST['password_register'], PASSWORD_DEFAULT);
             $mail = $_POST['email_register'];
-            $message = newUser($login, $password, $mail);
+            $name = $_POST['name_register'];
+            $firstname = $_POST['firstname_register'];
+            $adresse = $_POST['adresse_register'];
+            $message = newUser($login, $password, $mail,$name,$firstname,$adresse);
             if ($message) {
               $SUCCES["REGISTER"] = '<div class="alert alert-success" role="alert">Bien enregistrer!</div>';
             }

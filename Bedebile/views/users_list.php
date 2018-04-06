@@ -17,6 +17,8 @@ ob_start();?>
         <tr>
             <th scope="row"><?=$user['user_id']?></th>
             <td><?=$user['user_login']?></td>
+            <td><?=$user['user_name']?></td>
+            <td><?=$user['user_firstname']?></td>
             <td><?=$user['user_email']?></td>
             <td><?=$user['user_adresse']?></td>
             <td><?php if($user['user_role']==1){echo "Admin";}else {echo "Membre";}?></td>

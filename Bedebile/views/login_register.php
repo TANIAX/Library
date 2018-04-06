@@ -53,6 +53,15 @@
                                     <input type="text" name="login_register" id="login_register" tabindex="1" class="form-control" placeholder="Login" value="">
                                 </div>
                                 <div class="form-group">
+                                    <input type="text" name="name_register" id="name_register" tabindex="1" class="form-control" placeholder="Nom" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="firstname_register" id="first_register" tabindex="1" class="form-control" placeholder="Prenom" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="adresse_register" id="adresse_register" tabindex="1" class="form-control" placeholder="Adresse" value="">
+                                </div>
+                                <div class="form-group">
                                     <input type="email" name="email_register" id="email_register" tabindex="1" class="form-control" placeholder="Email Address" value="">
                                 </div>
                                 <div class="form-group">
