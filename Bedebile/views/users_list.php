@@ -6,8 +6,11 @@ ob_start();?>
         <tr>
             <th scope="col">#</th>
             <th scope="col">Login</th>
+            <th scope="col">Prenom</th>
+            <th scope="col">Nom</th>
             <th scope="col">E-mail</th>
             <th scope="col">Adresse</th>
+            <th scope="col">Telephone</th>
             <th scope="col">rôle</th>
             <th scope="col">Action</th>
         </tr>
@@ -21,6 +24,7 @@ ob_start();?>
             <td><?=$user['user_firstname']?></td>
             <td><?=$user['user_email']?></td>
             <td><?=$user['user_adresse']?></td>
+            <td><?=$user['user_tel']?></td>
             <td><?php if($user['user_role']==1){echo "Admin";}else {echo "Membre";}?></td>
             <td>
                 <div class="button-container">

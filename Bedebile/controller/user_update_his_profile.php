@@ -5,7 +5,8 @@ require 'models/user.php';
 $ERROR = array("UPDATEUSER" => "");
 $SUCCES = array("UPDATEUSER" => "");
 
-$user = getUser($_POST['login_update']);// J'ai oublier pq j'ai fais ça
+//Variable afin de préremplir le formulaire
+$user = getUserById($_SESSION['id']);
 // Set les variables à vide afin de prévenir des erreurs
 $name ='';
 $firstname ='';
@@ -14,9 +15,10 @@ $email ='';
 $adresse ='';
 $id='';
 $role='';
+$tel='';
 
 // Test de l'envoi du formulaire, si remplit ne met rien dans la variable errMsg
-if (isset($_POST)) {
+if (isset($_POST["update-user"])) {
       $errMsg = "";
       //Si le formulaire du login est vide
       if (!isset($_POST['login_update']) || empty($_POST['login_update'])) { //Pourquoi isset ou empty ?
@@ -38,6 +40,9 @@ if (isset($_POST)) {
       if (!isset($_POST['email_update']) || empty($_POST['email_update'])) {
           $errMsg .= "<li>email vide</li>";
       }//Si le mdp et la verification de mdp ne sont pas exactement les même, même type et même string
+      if (strlen($_POST['phonenumber_update'])>11) {
+          $errMsg .= "<li>Numéro de telephone invalide</li>";
+      }
       if ($_POST['password_update'] !== $_POST['password_verify_update']) {
           $errMsg = "<li>Les mots de passe ne correspondent pas</li>";
       }//Si le login mis à jours est différent de celui avant la mise à jours
@@ -69,15 +74,15 @@ if (isset($_POST)) {
         $login = htmlspecialchars($_POST['login_update']);
         $mail = htmlspecialchars($_POST['email_update']);
         $password = password_hash($_POST['password_update'], PASSWORD_DEFAULT); //Pas besoin de proteger le mdp pcq il est haché // TODO: poser la question au prof
-        $id = htmlspecialchars($_POST['id_update']);
-        $role=htmlspecialchars($_POST['role_update']);
+        $id = $_SESSION['id'];
+        $role=$_SESSION['role'];
         $adresse=htmlspecialchars($_POST['adresse_update']);
-        $tel=htmlspecialchars($_POST['phonenumber_update']);
+        $tel = htmlspecialchars($_POST['phonenumber_update']);
         //Envoie les à la base de données + securisation avec htmlspecialchars
         updateUser($name,$firstname,$login, $password,$mail,$adresse,$id,$role,$tel);
       }
     }
-    //Inclu la vue
-    include 'views/edit_user.php';
+    //Inclu la vue*/
+    include 'views/user_update_his_profile.php';
 
 ?>

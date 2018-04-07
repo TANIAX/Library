@@ -50,19 +50,22 @@
                                 <?= $ERROR["REGISTER"] ?>
                                 <?= $SUCCES["REGISTER"] ?>
                                 <div class="form-group">
-                                    <input type="text" name="login_register" id="login_register" tabindex="1" class="form-control" placeholder="Login" value="">
+                                    <input type="text" name="login_register" id="login_register" tabindex="1" class="form-control" placeholder="Login" value="<?=$RE_Login?>">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="name_register" id="name_register" tabindex="1" class="form-control" placeholder="Nom" value="">
+                                    <input type="text" name="name_register" id="name_register" tabindex="1" class="form-control" placeholder="Nom" value="<?=$RE_Nom?>">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="firstname_register" id="first_register" tabindex="1" class="form-control" placeholder="Prenom" value="">
+                                    <input type="text" name="firstname_register" id="firstname_register" tabindex="1" class="form-control" placeholder="Prenom" value="<?=$RE_Prenom?>">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="adresse_register" id="adresse_register" tabindex="1" class="form-control" placeholder="Adresse" value="">
+                                    <input type="text" name="phone_register" id="phone_register" tabindex="1" class="form-control" placeholder="Numero de telephone" value="<?=$RE_Tel?>">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" name="email_register" id="email_register" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                                    <input type="text" name="adresse_register" id="adresse_register" tabindex="1" class="form-control" placeholder="Adresse" value="<?=$RE_Adresse?>">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="email_register" id="email_register" tabindex="1" class="form-control" placeholder="Email Address" value="<?=$RE_Email?>">
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="password_register" id="password_register" tabindex="2" class="form-control" placeholder="Password">

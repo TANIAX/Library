@@ -38,10 +38,10 @@ function getPassword($login) {
 }
 
 //Cette fonction ajoute un nouvelle utilisateur
-function newUser($login,$password,$mail,$name,$firstname,$adresse){
+function newUser($login,$password,$mail,$name,$firstname,$adresse,$tel){
   $bdd = getDb();
 
-  $query = "INSERT INTO users (user_name, user_firstname, user_login, user_adresse, user_password , user_email, user_role) VALUES('$name','$firstname','$login' ,'$adresse' , '$password' , '$mail', '2')";
+  $query = "INSERT INTO users (user_name, user_firstname, user_login, user_adresse, user_password , user_email, user_role, user_tel) VALUES('$name','$firstname','$login' ,'$adresse' , '$password' , '$mail', '2', '$tel')";
   $transaction = $bdd->prepare($query); // Faire cela s'appele une transaction.
   $transaction->execute();
   return $transaction;
@@ -82,11 +82,11 @@ function getUserById($id) {
 }
 
 //Cette fonction mets à jours un utilisateur
-function updateUser($name,$firstname,$login, $password,$mail,$adresse,$id,$role){
+function updateUser($name,$firstname,$login, $password,$mail,$adresse,$id,$role,$tel){
   $bdd = getDb();
   //L'adresse n'étant pas requise je divise la requete en deux
   if (!empty($adresse)) {
-    $req = $bdd->prepare('UPDATE users SET user_name =:name, user_firstname =:firstname,user_login = :login, user_password = :password, user_email = :mail ,user_adresse = :adresse, user_role =:role WHERE user_id = :id ');
+    $req = $bdd->prepare('UPDATE users SET user_name =:name, user_firstname =:firstname,user_login = :login, user_password = :password, user_email = :mail ,user_adresse = :adresse, user_role =:role, user_tel =:tel WHERE user_id = :id ');
     $req->execute(array(
       'name' => $name,
       'firstname' => $firstname,
@@ -95,11 +95,12 @@ function updateUser($name,$firstname,$login, $password,$mail,$adresse,$id,$role)
     	'mail' => $mail,
       'adresse' => $adresse,
       'id' => $id,
-      'role' => $role
+      'role' => $role,
+      'tel' => $tel
     	));
   }
     else {
-      $req = $bdd->prepare('UPDATE users SET user_name =:name, user_firstname =:firstname, user_login = :login, user_password = :password, user_email = :mail ,user_adresse = :adresse, user_role =:role WHERE user_id = :id ');
+      $req = $bdd->prepare('UPDATE users SET user_name =:name, user_firstname =:firstname, user_login = :login, user_password = :password, user_email = :mail ,user_adresse = :adresse, user_role =:role, user_tel =:tel WHERE user_id = :id ');
       $req->execute(array(
         'name' => $name,
         'firstname' => $firstname,
@@ -108,7 +109,8 @@ function updateUser($name,$firstname,$login, $password,$mail,$adresse,$id,$role)
       	'mail' => $mail,
         'adresse' => '',
         'id' => $id,
-        'role' => $role
+        'role' => $role,
+        'tel' => $tel
       	));
     }
   }
