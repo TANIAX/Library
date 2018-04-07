@@ -1,4 +1,4 @@
-<?php //Abandon de le faire en objet, trop de chose a apprendr en peu de temps
+<?php //Abandon de le faire en objet, trop de chose a apprendre en peu de temps
 class Article{
 
   private $titre;

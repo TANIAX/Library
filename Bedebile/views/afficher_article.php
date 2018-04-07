@@ -48,9 +48,9 @@ $categorie='';
 						<p class="title"><?=$article['article_nom']?></p>
             <p class="prix"><?='<strong>Prix : </strong>' .$article['article_prix'] . '€'?></p>
             <?php if (isset($article['article_auteur']) && isset($article['article_auteur']) && isset($article['article_isbn'])) {?>
-              <p class="auteur"><?= '<strong>Auteur : </strong>'. $article['article_auteur']?></p>
-              <p class="editeur"><?='<strong>Editeur : </strong>'.$article['article_editeur']?></p>
-              <p class="isbn"><?='<strong>ISBN : </strong>'.$article['article_isbn']?></p><?php
+            <p class="auteur"><?= '<strong>Auteur : </strong>'. $article['article_auteur']?></p>
+            <p class="editeur"><?='<strong>Editeur : </strong>'.$article['article_editeur']?></p>
+            <p class="isbn"><?='<strong>ISBN : </strong>'.$article['article_isbn']?></p><?php
 
             } ?>
             <p class="genre"><?='<strong>Genre : </strong>' . $categorie?></p>
