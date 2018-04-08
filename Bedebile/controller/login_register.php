@@ -76,23 +76,45 @@ if (empty($_SESSION)) {
           if (!isset($_POST['login_register']) || empty($_POST['login_register'])) {
               $errMsg .= "<li>Login vide</li>";
           }
+          if (strlen($_POST['login_register'])>=255) {
+            $errMsg .= "<li>Login trop long</li>";
+          }
+
           if (!isset($_POST['name_register']) || empty($_POST['name_register'])) {
               $errMsg .= "<li>Nom vide</li>";
           }
+          if (strlen($_POST['name_register'])>=50) {
+            $errMsg .= "<li>Nom trop long</li>";
+          }
+
           if (!isset($_POST['firstname_register']) || empty($_POST['firstname_register'])) {
               $errMsg .= "<li>Prénom vide</li>";
           }
+          if (strlen($_POST['firstname_register'])>=50) {
+            $errMsg .= "<li>Prénom trop long</li>";
+          }
+
           if (!isset($_POST['adresse_register']) || empty($_POST['adresse_register'])) {
               $errMsg .= "<li>Adresse vide</li>";
           }
+          if (strlen($_POST['adresse_register'])>=255) {
+            $errMsg .= "<li>Adresse trop longue</li>";
+          }
+
           if (!isset($_POST['password_register']) || empty($_POST['password_register'])) {
               $errMsg .= "<li>Password vide</li>";
+          }
+          if (strlen($_POST['password_register'])>=255) {
+            $errMsg .= "<li>Mot de passe trop long</li>";
           }
           if (!isset($_POST['confirm-password_register']) || empty($_POST['password_register'])) {
               $errMsg .= "<li>Password verification vide</li>";
           }
           if (!isset($_POST['email_register']) ||empty($_POST['email_register'])){
               $errMsg .= "<li>Email vide</li>";
+          }
+          if (strlen($_POST['email_register'])>=255) {
+            $errMsg .= "<li>email trop long</li>";
           }
           $user = getUser($_POST['login_register']);
           if ($user) {
@@ -114,10 +136,8 @@ if (empty($_SESSION)) {
               $firstname = $_POST['firstname_register'];
               $adresse = $_POST['adresse_register'];
               $tel = $_POST['phone_register'];
-              $message = newUser($login, $password, $mail,$name,$firstname,$adresse,$tel);
-              if ($message) {
-                $SUCCES["REGISTER"] = '<div class="alert alert-success" role="alert">Bien enregistrer!</div>';
-              }
+              newUser($login, $password, $mail,$name,$firstname,$adresse,$tel);
+              $SUCCES["REGISTER"] = '<div class="alert alert-success" role="alert">Bien enregistrer!</div>';
           }
         }
           if (strlen($errMsg) != 0) {

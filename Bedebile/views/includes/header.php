@@ -30,7 +30,7 @@
                       }
                       else {
                         if ($_SESSION['role'] == 1) {
-                          echo "<li class=\"profile-li\"><a class=\"profile-links\" href=\""?><?=URL . "welcome\">Ajouter article</a></li>";
+                          echo "<li class=\"profile-li\"><a class=\"profile-links\" href=\""?><?=URL . "add_article\">Ajouter article</a></li>";
                           echo "<li class=\"profile-li\"><a class=\"profile-links\" href=\""?><?=URL . "users_list\">Editer utilisateur</a></li>";
                         }
                         echo "<li class=\"profile-li\"><a class=\"profile-links\" href=\""?><?=URL . "welcome\">Mes commandes</a></li>";

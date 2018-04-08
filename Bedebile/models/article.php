@@ -32,4 +32,32 @@ function searchArticle($data){  //Tuto expliquer en russe, j'ai rien compris.
     return null;// FIXME: Faire en sorte que la le bouton ne renvoie rien
   }
 }
+
+function newArticle($nom, $prix, $date,$auteur,$editeur,$isbn,$image,$description,$categorie){
+  $bdd = getDb();
+    if (empty($auteur) && empty($editeur) && empty($isbn)) {
+      $query = "INSERT INTO articles
+      (article_nom, article_prix, article_date, article_image, article_description, article_categorie)
+      VALUES('$nom','$prix','$date', '$image', '$description','$categorie')";
+      $transaction = $bdd->prepare($query); // Faire cela s'appele une transaction.
+      $transaction->execute();
+      return $transaction;
+    }else{
+      $query = "INSERT INTO articles
+      (article_nom, article_prix, article_date, article_auteur, article_editeur , article_isbn, article_image,article_description,article_categorie)
+      VALUES('$nom','$prix','$date' ,'$auteur' , '$editeur' , '$isbn', '$image', '$description','$categorie')";
+      $transaction = $bdd->prepare($query); // Faire cela s'appele une transaction.
+      $transaction->execute();
+      return $transaction;
+    }
+  }
+
+function getArticleByIsbn($article_isbn){
+  $bdd = getDb();
+  $reponse = $bdd->prepare('SELECT article_isbn FROM articles WHERE article_isbn = :article_isbn');
+  $reponse->execute(array('article_isbn' => $article_isbn));
+  $donnees = $reponse->fetch();
+  $reponse->closeCursor();
+  return $donnees;
+}
 ?>
