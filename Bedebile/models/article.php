@@ -1,31 +1,31 @@
 <?php
-require "db.php";
-//Cette fonction récupère toutes les données de tout les articles
-function getArticle() {
-    $bdd = getDb();
-    $reponse = $bdd->query('SELECT * FROM articles');
-    $donnees = $reponse->fetchAll();
-    $reponse->closeCursor(); // Termine le traitement de la requête
-    return $donnees;
+require 'models/db.class.php';
+
+function getArticle()
+{
+  $DB = new DB();
+  $req =$DB->db->prepare('SELECT * FROM articles');
+  $req->execute();
+  return $req->fetchAll(PDO::FETCH_OBJ);
 }
-//Cette fonction récupere les toutes les données en fonction du genre d'article transmis en argument
+
 function getArticleByKind($article_categorie) {
-  $bdd = getDb();
-  $reponse = $bdd->prepare('SELECT * FROM articles WHERE article_categorie = :article_categorie');
-  $reponse->execute(array('article_categorie' => $article_categorie));
-  $donnees = $reponse->fetchAll();
-  $reponse->closeCursor();
+  $DB = new DB();
+  $req =$DB->db->prepare('SELECT * FROM articles WHERE article_categorie = :article_categorie');
+  $req->execute(array('article_categorie' => $article_categorie));
+  $donnees = $req->fetchAll(PDO::FETCH_OBJ);
+  $req->closeCursor();
   return $donnees;
 }
-//Cette fonction recher un article en fonction des données que lui as transmis le moteur de recherche du site
+
 function searchArticle($data){  //Tuto expliquer en russe, j'ai rien compris.
-  $bdd = getDb();
+  $DB = new DB();
   $value = "%$data%";
   if (isset($value)) {
-    $reponse = $bdd->prepare('SELECT * FROM articles WHERE article_nom LIKE  ?'); // TODO: Ne pas baser le moteur de recherche que sur le nom
-    $reponse ->execute([$value]);
-    $donnees = $reponse->fetchAll(\PDO::FETCH_UNIQUE);
-    $reponse->closeCursor(); // Termine le traitement de la requête
+    $req = $DB->db->prepare('SELECT * FROM articles WHERE article_nom LIKE  ?'); // TODO: Ne pas baser le moteur de recherche que sur le nom
+    $req ->execute([$value]);
+    $donnees = $req->fetchAll(PDO::FETCH_OBJ);
+    $req->closeCursor(); // Termine le traitement de la requête
     return $donnees;
   }
   else {
@@ -33,31 +33,98 @@ function searchArticle($data){  //Tuto expliquer en russe, j'ai rien compris.
   }
 }
 
+
 function newArticle($nom, $prix, $date,$auteur,$editeur,$isbn,$image,$description,$categorie){
-  $bdd = getDb();
-    if (empty($auteur) && empty($editeur) && empty($isbn)) {
-      $query = "INSERT INTO articles
-      (article_nom, article_prix, article_date, article_image, article_description, article_categorie)
-      VALUES('$nom','$prix','$date', '$image', '$description','$categorie')";
-      $transaction = $bdd->prepare($query); // Faire cela s'appele une transaction.
-      $transaction->execute();
-      return $transaction;
-    }else{
-      $query = "INSERT INTO articles
-      (article_nom, article_prix, article_date, article_auteur, article_editeur , article_isbn, article_image,article_description,article_categorie)
-      VALUES('$nom','$prix','$date' ,'$auteur' , '$editeur' , '$isbn', '$image', '$description','$categorie')";
-      $transaction = $bdd->prepare($query); // Faire cela s'appele une transaction.
-      $transaction->execute();
-      return $transaction;
+  $DB = new DB();
+  if (empty($auteur) && empty($editeur) && empty($isbn)) {
+    $query = "INSERT INTO articles
+    (article_nom, article_prix, article_date, article_image, article_description, article_categorie)
+    VALUES('$nom','$prix','$date', '$image', '$description','$categorie')";
+    $transaction = $DB->db->prepare($query); // Faire cela s'appele une transaction.
+    $transaction->execute();
+    return $transaction;
+  }else{
+    $query = "INSERT INTO articles
+    (article_nom, article_prix, article_date, article_auteur, article_editeur , article_isbn, article_image,article_description,article_categorie)
+    VALUES('$nom','$prix','$date' ,'$auteur' , '$editeur' , '$isbn', '$image', '$description','$categorie')";
+    $transaction = $DB->db->prepare($query); // Faire cela s'appele une transaction.
+    $transaction->execute();
+    return $transaction;
+  }
+}
+
+
+function getArticleByIsbn($article_isbn){
+  $DB = new DB();
+  $req = $DB->db->prepare('SELECT article_isbn FROM articles WHERE article_isbn = :article_isbn');
+  $req->execute(array('article_isbn' => $article_isbn));
+  $donnees = $req->fetch(PDO::FETCH_OBJ);
+  $req->closeCursor();
+  return $donnees;
+}
+
+function getArticleById($article_id) {
+  $DB = new DB();
+  $req = $DB->db->prepare('SELECT * FROM articles WHERE article_id = :article_id');
+  $req->execute(array('article_id' => $article_id));
+  $donnees = $req->fetch(PDO::FETCH_OBJ);
+  $req->closeCursor();
+  return $donnees;
+}
+
+function getArticleIdById($article_id) {
+  $DB = new DB();
+  $req = $DB->db->prepare('SELECT article_id FROM articles WHERE article_id = :article_id');
+  $req->execute(array('article_id' => $article_id));
+  $donnees = $req->fetch(PDO::FETCH_OBJ);
+  $req->closeCursor();
+  return $donnees;
+}
+
+function deleteArticle($article_id) {
+  $DB = new DB();
+  $req = $DB->db->prepare('DELETE FROM articles WHERE article_id = :article_id');
+  $req->execute(array('article_id' => $article_id));
+  $req->closeCursor();
+}
+
+function updateArticle($nom, $prix, $article_date,$auteur,$editeur,$isbn,$image,$description,$categorie,$id){
+  $DB = new DB();
+  if (!empty($auteur) && !empty($editeur) && !empty($isbn)) {
+    $req = $DB->db->prepare('UPDATE articles SET article_nom =:article_nom,
+      article_prix = :article_prix,
+      article_date = :article_date,
+      article_auteur = :article_auteur,
+      article_editeur = :article_editeur,
+      article_isbn = :article_isbn,
+      article_image = :article_image,
+      article_description = :article_description,
+      article_categorie = :article_categorie
+      WHERE article_id = :article_id ');
+      $req->execute(array(
+        'article_nom' => $nom,
+        'article_prix' => $prix,
+        'article_date' => $article_date,
+        'article_auteur' => $auteur,
+        'article_editeur' => $editeur,
+        'article_isbn' => $isbn,
+        'article_image' => $image,
+        'article_description' => $description,
+        'article_categorie' => $categorie,
+        'article_id' => $id
+      ));
+    }
+    else {
+      $req = $DB->db->prepare('UPDATE articles SET article_nom =:nom, article_prix =:prix, article_date = :article_date, article_image =:image, article_description =:description,article_categorie =:categorie WHERE article_id = :id ');
+      $req->execute(array(
+        'nom' => $nom,
+        'prix' => $prix,
+        'article_date' => $article_date,
+        'image' => $image,
+        'description' => $description,
+        'categorie' => $categorie
+      ));
     }
   }
 
-function getArticleByIsbn($article_isbn){
-  $bdd = getDb();
-  $reponse = $bdd->prepare('SELECT article_isbn FROM articles WHERE article_isbn = :article_isbn');
-  $reponse->execute(array('article_isbn' => $article_isbn));
-  $donnees = $reponse->fetch();
-  $reponse->closeCursor();
-  return $donnees;
-}
-?>
+ ?>

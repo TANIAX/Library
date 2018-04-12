@@ -15,29 +15,29 @@ class Article{
     this->$editeur = $editeur;
   }
 
-    public function getIsbn() {
-        return $isbn;
-    }
+  public function getIsbn() {
+    return $isbn;
+  }
 
-    public function getPrix() {
-        return $prix;
-    }
+  public function getPrix() {
+    return $prix;
+  }
 
-    public function getTitre() {
-        return $titre;
-    }
+  public function getTitre() {
+    return $titre;
+  }
 
-    public function setTitre($titre) {
-        this->$titre = $titre;
-    }
+  public function setTitre($titre) {
+    this->$titre = $titre;
+  }
 
-    public function setPrix($prix) {
-        this->$prix = $prix;
-    }
+  public function setPrix($prix) {
+    this->$prix = $prix;
+  }
 
-    public function setIsbn($isbn) {
-        this->$isbn = $isbn;
-    }
+  public function setIsbn($isbn) {
+    this->$isbn = $isbn;
+  }
 
 }
 ?>
