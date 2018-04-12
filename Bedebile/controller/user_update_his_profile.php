@@ -28,22 +28,42 @@ if (isset($_POST["update-user"])) {
   if (!isset($_POST['login_update']) || empty($_POST['login_update'])) { //Pourquoi isset ou empty ?
     // Place une erreur dans errMsg
     $errMsg .= "<li>Login vide</li>";
-  }//Pareille pour le nom
+  }
+  if (strlen($_POST['login_update'])>=255) {
+    $errMsg .= "<li>Login trop grand</li>";
+  }
+  //Pareille pour le nom
   if (!isset($_POST['name_update']) ||empty($_POST['name_update'])) {
     $errMsg .= "<li>Nom vide</li>";
-  }//Pareille pour le prénom
+  }
+  if (strlen($_POST['name_update'])>=50) {
+    $errMsg .= "<li>Nom trop grand</li>";
+  }
+  //Pareille pour le prénom
   if (!isset($_POST['firstname_update']) || empty($_POST['firstname_update'])) {
     $errMsg .= "<li>Prénom vide</li>";
-  }//Pareille pour le mdp
+  }
+  if (strlen($_POST['firstname_update'])>=50) {
+    $errMsg .= "<li>Prénom trop grand</li>";
+  }
+  //Pareille pour le mdp
   if (!isset($_POST['password_update']) || empty($_POST['password_update'])) {
     $errMsg .= "<li>Password vide</li>";
-  }//Pareille pour la verification de mdp
+  }
+  if (strlen($_POST['password_update'])>=50) {
+    $errMsg .= "<li>Mot de passe trop grand</li>";
+  }
+  //Pareille pour la verification de mdp
   if (!isset($_POST['password_verify_update']) || empty($_POST['password_verify_update'])) {
     $errMsg .= "<li>Password verification vide</li>";
   }//Pareille pour l'email
   if (!isset($_POST['email_update']) || empty($_POST['email_update'])) {
     $errMsg .= "<li>email vide</li>";
-  }//Si le mdp et la verification de mdp ne sont pas exactement les même, même type et même string
+  }
+  if (strlen($_POST['email_update'])>=50) {
+    $errMsg .= "<li>Email trop grand</li>";
+  }
+  //Si le mdp et la verification de mdp ne sont pas exactement les même, même type et même string
   if (strlen($_POST['phonenumber_update'])>11) {
     $errMsg .= "<li>Numéro de telephone invalide</li>";
   }

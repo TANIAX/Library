@@ -1,6 +1,6 @@
 <?php
 class panier{
-
+ private $DB
 	public function __construct($DB){
 		if(!isset($_SESSION['panier'])){
 			$_SESSION['panier'] = array();

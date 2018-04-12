@@ -10,6 +10,9 @@ if ($_SESSION['role']==1) {
     if (!isset($_POST['article_nom']) || empty($_POST['article_nom'])) {
       $errMsg .= "<li>Nom article vide</li>";
     }
+    if (strlen($_POST['article_nom']) >= 255) {
+      $errMsg .= "<li>Nom article trop grand</li>";
+    }
     if (!isset($_POST['article_prix']) || empty($_POST['article_prix'])) {
       $errMsg .= "<li>Prix article vide</li>";
     }
@@ -25,6 +28,20 @@ if ($_SESSION['role']==1) {
         $errMsg .= "<li>ISBN déjà existant</li>";
       }
     }
+    if (strlen($_POST['article_isbn']) >= 255) {
+      $errMsg .= "<li>ISBN trop grand</li>";
+    }
+    if (strlen($_POST['article_auteur']) >= 255) {
+      $errMsg .= "<li>Auteur trop grand</li>";
+    }
+    if (strlen($_POST['article_editeur']) >= 255) {
+      $errMsg .= "<li>Editeur trop grand</li>";
+    }
+    if (strlen($_POST['article_image']) >= 1000) {
+      $errMsg .= "<li>Lien image trop grand trop grand</li>";
+    }
+
+
     if (strlen($errMsg) == 0) {
       $nom = htmlspecialchars($_POST['article_nom']);
       $prix = htmlspecialchars($_POST['article_prix']);
