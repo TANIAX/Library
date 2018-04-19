@@ -724,3 +724,38 @@
   background-color: #fff;
   border-color: #fff;
 }
+
+
+
+
+
+/*TEST*/
+/* 
+table {
+    width: 50%;
+}
+
+thead, tbody, tr, td, th {
+    display: block;
+}
+
+thead th {
+    height: 30px;
+}
+
+tbody {
+    overflow-y: auto;
+    height: 300px;
+}
+
+tbody td, thead th {
+    float: left;
+    width: 20%;
+}
+
+tr:after {
+    clear: both;
+    content: ' ';
+    display: block;
+    visibility: hidden;
+} */

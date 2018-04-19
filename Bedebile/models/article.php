@@ -9,6 +9,20 @@ function getArticle()
   return $req->fetchAll(PDO::FETCH_OBJ);
 }
 
+function articlePanier($article_id){
+  $DB = new DB();
+  $req =$DB->db->prepare('SELECT * FROM articles where article_id IN ('.implode(',',$article_id).')');
+  $req->execute($article_id);
+  return $req->fetchAll(PDO::FETCH_OBJ);
+}
+
+function articlePanierIdPrice($article_id){
+  $DB = new DB();
+  $req =$DB->db->prepare('SELECT article_id , article_prix FROM articles where article_id IN ('.implode(',',$article_id).')');
+  $req->execute($article_id);
+  return $req->fetchAll(PDO::FETCH_OBJ);
+}
+
 function getArticleByKind($article_categorie) {
   $DB = new DB();
   $req =$DB->db->prepare('SELECT * FROM articles WHERE article_categorie = :article_categorie');
@@ -86,6 +100,9 @@ function deleteArticle($article_id) {
   $req = $DB->db->prepare('DELETE FROM articles WHERE article_id = :article_id');
   $req->execute(array('article_id' => $article_id));
   $req->closeCursor();
+}
+function deleteArticleFromPanier($article_id){
+  unset($_SESSION['panier'][$article_id]);
 }
 
 function updateArticle($nom, $prix, $article_date,$auteur,$editeur,$isbn,$image,$description,$categorie,$id){

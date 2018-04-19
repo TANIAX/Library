@@ -53,7 +53,7 @@ $categorie='';
 							<p class="isbn"><?='<strong>ISBN : </strong>'.$article->article_isbn ?></p><?php
 						} ?>
 						<p class="genre"><strong>Genre : </strong><?=$categorie?></p>
-						<a href="addpanier?article_id=<?=$article->article_id?>" class="btn btn-warning" role="button">&nbsp+&nbsp</a>
+						<a href="addpanier?article_id=<?=$article->article_id?>" class="btn btn-warning add addPanier" role="button">&nbsp+&nbsp</a>
 						<?php if (isset($_SESSION['role'])==1){ ?>
 							<p class="editer">
 								<form class="test" action="edit_article" method="post">

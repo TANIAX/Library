@@ -25,5 +25,6 @@ $(function() {
 		$(this).addClass('active');
 		e.preventDefault();
 	});
-
 });
+
+/*add panier*/
