@@ -9,6 +9,13 @@ CREATE TABLE roles (
 ) ENGINE=INNODB DEFAULT CHARSET=latin1;
 INSERT INTO Roles (role_name) VALUES ('admin'),('membre');
 
+DROP TABLE IF EXISTS statut;
+CREATE TABLE statut(
+statut_id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+statut_nom VARCHAR(10) NOT NULL UNIQUE
+) ENGINE=INNODB DEFAULT CHARSET=latin1;
+INSERT INTO statut (statut_nom) VALUES ('valider'),('en attente'),('refuser');
+
 DROP TABLE IF EXISTS categorie;
 CREATE TABLE categorie (
   categorie_id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -51,7 +58,7 @@ VALUES ('Guillaume.cornez@gmail.com','Guillaume','Cornez','toto','$2y$10$wnr2tAM
 FOREIGN KEY (article_categorie) REFERENCES categorie(categorie_id)
 ) ENGINE=INNODB DEFAULT CHARSET=latin1;
 INSERT INTO articles (article_prix,article_image,article_nom,article_auteur,article_editeur,article_categorie,article_isbn,article_date,article_description)
-VALUES (7.5,'http://res.cloudinary.com/dfencxbqa/image/upload/v1523034128/op73png.png','One piece t.73 : L\'opération dressrosa S.O.P.','Eiichiro ODA','Glenat',5,'11113',NOW(),'Test'),
+VALUES (7.5,'http://res.cloudinary.com/dfencxbqa/image/upload/v1523034128/op73png.png','One piece t.73 : L\'opération dressrosa S.O.P.','Eiichiro ODA','Glenat',5,'11113',NOW(),'PoNlo0RoPiwCIMcZnso3KtUNhxaYUM3i3d4EBBKi4eZo6kGkkclh2eXHf78B39QE92JGXc3EWYVajfNSnXkVuCB3yML2GIXUjWq14ShVJYC6WFNZovLCNlZbUhlRlFVy5AAPdUAq2ZXSVozjlbNGyluqqA6ciOyBp2OmLrcYBVgAwxXkQlILNBJgLgLdz7RlMIr94lelGQu8k5doKcyigx2OUIE1psBV8HqkRMf4SrLTB21PAyKb0Wa4o2zHYMrxiuQGtA9Hclharvl08nMUNdyhaxzWDqmbo7f3hieVekoAdW434OBKUvelMF4vqHbyQxI8igBIeMar5ivuiEibgnos9G3ZXDnVmIvFOFZQL8ys7VFt3SeAhuTiajLyWLU9WDb7xommlNUqfPydaCTOC08Hz8wZc0PizzGdEtqQFE1i2Y5eegaqfewS5w9VVWD9OboMIFndwo74K2IgP9scyfSHhun9U2bys4EnBQdk598wbhJkzWFtOhPlb1bMlfTm125HGhmAfnvKq82Af20qfL0ZBfB4wh4dW9mpZLP9PJ9DkE2lfI7enQdNsKQgx5xTV5YWxUSkKcRESRzmRX82mtSBCuicV1ecZGDmPRvDP67d0tniO943U3EjY6qW8HsSpst0SPnF2lzF9tusqLsEdCLrSdv2jWbza51IPHhGvah1X3axlcxw0TigVSVui3dryDIk1M1RR4TcTahlsUJUswTPhaF2VR8Rrr04k3WhoR4iqvIoDTfTd7Uc0HX7KM3rZn70iRdm6FJtbNUpcNzyvKi8sDgMOLE7VZSjZudu07HCZmcV9Q2uSSporgCsxowJiluUTmJm2Zb3b8AK6c8KrbBargtrB6VYolHlLFBnTZiTe0ZYVgvl83z7eCEglAXyQBPK3rbHPgccX7JJP2ZTDjZbr1467ijMIBU4NrRHkspmHPyqZFzswflDws8jFqJkvg4qyJnWz6Se0hWOMWtjdu2hgXAhs1gK2L3Bewe8'),
        (7.5,'http://res.cloudinary.com/dfencxbqa/image/upload/v1523034128/op72.png','One piece t.72 : Les oubliés de dressrosa ','Eiichiro ODA','Glenat',5,'11112',NOW(),'Test'),
        (7.5,'http://res.cloudinary.com/dfencxbqa/image/upload/v1523034127/op71.png','One piece t.71 : Le colisée de tous les dangers.','Eiichiro ODA','Glenat',5,'11111',NOW(),'Test'),
        (7.5,'http://res.cloudinary.com/dfencxbqa/image/upload/v1523047075/Opera_Instantané_2018-04-06_223534_www.amazon.fr.png','One piece t.74 : Je serai toujours à tes côtés','Eiichiro ODA','Glenat',5,'11114',NOW(),'Test'),
@@ -68,7 +75,10 @@ DROP TABLE IF EXISTS commandes;
 CREATE TABLE commandes (
   commande_id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   commande_user_id INT(11) NOT NULL,
-  FOREIGN KEY (commande_user_id) REFERENCES users (user_id)
+  commande_date DATETIME,
+  commande_statut INT(11) DEFAULT 2,
+  FOREIGN KEY (commande_user_id) REFERENCES users (user_id),
+  FOREIGN KEY (commande_statut) REFERENCES statut (statut_id)
 )ENGINE=INNODB DEFAULT CHARSET=latin1;
 
   DROP TABLE IF EXISTS jointable;
