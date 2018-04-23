@@ -23,7 +23,9 @@ class panier
 
     public function total()
     {
-        $total = 0;
+        // $tva;
+        $tva = 19.6/100;
+        $prixHT = 0;
         $ids = array_keys($_SESSION['panier']);
         if (empty($ids)) {
             $article = array();
@@ -31,9 +33,12 @@ class panier
             $article = articlePanierIdPrice($ids);
         }
         foreach ($article as $article) {
-            $total += $article->article_prix * $_SESSION['panier'][$article->article_id];
+            $prixHT += $article->article_prix * $_SESSION['panier'][$article->article_id];
         }
-        return $total;
+
+        $TVA = ($prixHT*$tva);
+        $prixTTC  = $prixHT + $TVA;
+        return $prixTTC;
     }
 }
 

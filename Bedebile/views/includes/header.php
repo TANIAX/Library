@@ -35,7 +35,7 @@
                 echo "<li class=\"profile-li\"><a class=\"profile-links\" href=\""?><?=URL . "add_article\">Ajouter article</a></li>";
                 echo "<li class=\"profile-li\"><a class=\"profile-links\" href=\""?><?=URL . "article\">Editer article</a></li>";
                 echo "<li class=\"profile-li\"><a class=\"profile-links\" href=\""?><?=URL . "users_list\">Editer utilisateur</a></li>";
-                echo "<li class=\"profile-li\"><a class=\"profile-links\" href=\""?><?=URL . "commande_list\">Liste des commandes</a></li>";
+                echo "<li class=\"profile-li\"><a class=\"profile-links\" href=\""?><?=URL . "liste_commande\">Liste des commandes</a></li>";
               }
               echo "<li class=\"profile-li\"><a class=\"profile-links\" href=\""?><?=URL . "welcome\">Mes commandes</a></li>";
               echo "<li class=\"profile-li\"><a class=\"profile-links\" href=\" "?><?=URL . "user_update_his_profile\">Editer mon profil</a></li>";

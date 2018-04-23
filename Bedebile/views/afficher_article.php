@@ -58,7 +58,8 @@ $categorie = '';
                                class="btn btn-warning add addPanier" role="button">&nbsp+&nbsp</a>
                         <?php endif; ?>
 
-                        <?php if (isset($_SESSION['role']) == 1) { ?>
+                        <?php if (isset($_SESSION['role'])) {
+                            if ($_SESSION['role'] == 1){ ?>
                             <p class="editer">
                             <form class="test" action="edit_article" method="post">
                                 <button type="submit" type="submit" name="update_article" class="btn btn-primary"
@@ -69,7 +70,8 @@ $categorie = '';
                                 </button>
                             </form>
                             </p>
-                        <?php } ?>
+                          <?php }
+                         } ?>
                     </li>
                 <?php endforeach; ?>
             </ul>

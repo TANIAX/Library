@@ -33,10 +33,10 @@ if (isset($_POST["update"])) {
     if (strlen($_POST['article_isbn']) >= 255) {
         $errMsg .= "<li>ISBN trop grand</li>";
     }
-    if (strlen($_POST['article_auteur']) >= 255) {
+    if (strlen($_POST['article_author']) >= 255) {
         $errMsg .= "<li>Auteur trop grand</li>";
     }
-    if (strlen($_POST['article_editeur']) >= 255) {
+    if (strlen($_POST['article_editor']) >= 255) {
         $errMsg .= "<li>Editeur trop grand</li>";
     }
     if (strlen($_POST['article_image']) >= 1000) {

@@ -11,10 +11,13 @@ if (!empty($_SESSION['login'])) {
       unset($_SESSION['panier']);
       header('Location: index');
     } else {
-      echo "pute";//// TODO: afficher erreur
+      header('Location: erreur');//// TODO: afficher erreur
     }
-    // $ids = array_keys($_SESSION['panier']);
+  }else {
+    header('Location: panier');
   }
+}else {
+  header('Location: login_register');
 }
 
- ?>
+?>
