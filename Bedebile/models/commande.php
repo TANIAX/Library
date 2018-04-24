@@ -44,16 +44,16 @@ function getListeCommande(){
   return $req->fetchAll(PDO::FETCH_OBJ);
 }
 
-function getTest($commande_user_id){
+function getTest(){
   $DB = new DB();
-  $req = $DB->db->prepare("SELECT user_login, jointure_prix , article_nom FROM commandes
+  $req = $DB->db->prepare("SELECT user_login, jointure_prix , article_nom , user_id, commande_id , commande_date , commande_statut FROM commandes
                                                                           INNER JOIN jointable ON commande_id = jointure_commande_id
                                                                           INNER JOIN articles ON jointure_article_id = article_id
                                                                           INNER JOIN users ON commande_user_id = user_id
-                                                                          WHERE commande_id = (SELECT MAX(commande_id)
-                                                                                                FROM commandes
-                                                                                                WHERE commande_user_id = commande_user_id)");
-  $req->execute(array('commande_user_id' => $commande_user_id));
+                                                                          WHERE commande_id IN (SELECT commande_id
+                                                                                                FROM commandes , users
+                                                                                                WHERE commande_user_id = user_id)");
+  $req->execute();
   return $req->fetchAll(PDO::FETCH_OBJ);
 
 }

@@ -6,7 +6,7 @@
       <h3 class="panel-title">Liste des commande</h3>
     </div>
     <ul class="list-group">
-      <?php foreach ($commande as $commande): ?>
+      <?php foreach ($commande->commande_id as $commande): ?>
         <?php
         $statut = "";
         switch ($commande->commande_statut) {
