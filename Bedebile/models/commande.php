@@ -44,9 +44,32 @@ function getListeCommande(){
   return $req->fetchAll(PDO::FETCH_OBJ);
 }
 
+function getUserById($id)
+{
+    $DB = new DB();
+    $req = $DB->db->prepare('SELECT * FROM users WHERE user_id = :id');
+    $req->execute(array('id' => $id));
+    $donnees = $req->fetch(PDO::FETCH_OBJ);
+    $req->closeCursor();
+    return $donnees;
+}
+
+function getArticlesByCommandeId($commande_id){
+  $DB = new DB();
+  $req = $DB->db->prepare('SELECT * FROM articles INNER JOIN jointable ON jointure_article_id = article_id WHERE jointure_commande_id = 1');
+  $req->execute();
+  $donnees = $req->fetch(PDO::FETCH_OBJ);
+  $req->closeCursor();
+  return $donnees;
+}
+
+
+
+
+
 function getTest(){
   $DB = new DB();
-  $req = $DB->db->prepare("SELECT user_login, jointure_prix , article_nom , user_id, commande_id , commande_date , commande_statut FROM commandes
+  $req = $DB->db->prepare("SELECT user_login, jointure_prix , article_nom , user_id, user_adresse , commande_id , commande_date , commande_statut FROM commandes
                                                                           INNER JOIN jointable ON commande_id = jointure_commande_id
                                                                           INNER JOIN articles ON jointure_article_id = article_id
                                                                           INNER JOIN users ON commande_user_id = user_id

@@ -6,8 +6,10 @@
       <h3 class="panel-title">Liste des commande</h3>
     </div>
     <ul class="list-group">
-      <?php foreach ($commande->commande_id as $commande): ?>
+      <?php $i=0; ?>
+      <?php foreach ($commande as $commande): ?>
         <?php
+
         $statut = "";
         switch ($commande->commande_statut) {
           case 1:
@@ -38,28 +40,28 @@
             <div class="container">
               <div class="fluid-row">
                 <div class="col-xs-1">
-                  Detail:
+                  Nom :
                 </div>
                 <div class="col-xs-5">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  test
                 </div>
                 <div class="col-xs-1">
-                  Detail:
+                  Prix total :
                 </div>
                 <div class="col-xs-5">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  test
                 </div>
                 <div class="col-xs-1">
-                  Detail:
+                  Adresse :
                 </div>
                 <div class="col-xs-5">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  test
                 </div>
                 <div class="col-xs-1">
-                  Detail:
+                  Article :
                 </div>
                 <div class="col-xs-5">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  test
                 </div>
               </div>
             </div>
