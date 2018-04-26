@@ -7,11 +7,11 @@
     </div>
     <ul class="list-group">
       <?php $i=0; ?>
-      <?php foreach ($commande as $commande): ?>
+      <?php foreach ($commandes as $commande): ?>
         <?php
 
         $statut = "";
-        switch ($commande->commande_statut) {
+        switch ($commande['commande']->commande_statut) {
           case 1:
           $statut = "valider";
           break;
@@ -27,15 +27,15 @@
         ?>
 
         <li class="list-group-item">
-          <div class="row toggle" id="dropdown-detail-<?=$commande->commande_id?>" data-toggle="detail-<?=$commande->commande_id?>">
+          <div class="row toggle" id="dropdown-detail-<?=$commande['commande']->commande_id?>" data-toggle="detail-<?=$commande['commande']->commande_id?>">
             <div class="col-xs-10">
-              <div class="col-sm-4"><strong>Commande n°</strong> <?=$commande->commande_id?></div>
+              <div class="col-sm-4"><strong>Commande n°</strong> <?=$commande['commande']->commande_id?></div>
               <div class="col-sm-4"><strong>Statut :</strong><?=$statut?></div>
-              <div class="col-sm-4"><strong>Date :</strong><?=$commande->commande_date?></div>
+              <div class="col-sm-4"><strong>Date :</strong><?=$commande['commande']->commande_date?></div>
             </div>
             <div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
           </div>
-          <div id="detail-<?=$commande->commande_id?>">
+          <div id="detail-<?=$commande['commande']->commande_id?>">
             <hr></hr>
             <div class="container">
               <div class="fluid-row">
@@ -66,6 +66,11 @@
               </div>
             </div>
           </div>
+
+      <?php foreach ($commande['articles'] as $article): ?>
+      <?= $article->article_nom?>
+      </br>
+      <?php endforeach; ?>
         </li>
       <?php endforeach; ?>
 
