@@ -58,7 +58,7 @@ function getArticlesByCommandeId($commande_id){
   $DB = new DB();
   $req = $DB->db->prepare('SELECT * FROM articles INNER JOIN jointable ON jointure_article_id = article_id WHERE jointure_commande_id = 1');
   $req->execute();
-  $donnees = $req->fetch(PDO::FETCH_OBJ);
+  $donnees = $req->fetchAll(PDO::FETCH_OBJ);
   $req->closeCursor();
   return $donnees;
 }
