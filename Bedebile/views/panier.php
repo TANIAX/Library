@@ -9,7 +9,6 @@
             <th>Quantité</th>
             <th>Image article</th>
             <th>Nom article</th>
-            <!-- <th>Description article</th> -->
             <th>Prix article</th>
             <th>Action</th>
         </tr>
@@ -20,7 +19,6 @@
                 <td><?= $_SESSION['panier'][$article->article_id] ?></td>
                 <td><img src="<?= $article->article_image ?>" style="width:75px;height:100px;"></td>
                 <td><?= $article->article_nom ?></td>
-                <!-- <td><textarea readonly rows="2" cols="20"><?= $article->article_description ?></textarea></td>  -->
                 <td><?= $article->article_prix . "€" ?></td>
                 <td><a href="panier?del=<?= $article->article_id ?>"><span class="glyphicon glyphicon-trash"></span></a>
                 </td>

@@ -1,4 +1,8 @@
-<?php ob_start(); ?>
+<?php ob_start();
+$prixHT = 0;
+$tva = 19.6/100;
+ ?>
+
 
 <div class="container">
   <div class="panel panel-default">
@@ -9,7 +13,6 @@
       <?php $i=0; ?>
       <?php foreach ($commandes as $commande): ?>
         <?php
-
         $statut = "";
         switch ($commande['commande']->commande_statut) {
           case 1:
@@ -43,35 +46,43 @@
                   Nom :
                 </div>
                 <div class="col-xs-5">
-                  test
+                  <?=$commande['user']->user_firstname . " "  .$commande['user']->user_name ?>
                 </div>
                 <div class="col-xs-1">
-                  Prix total :
+                  Total :
                 </div>
                 <div class="col-xs-5">
-                  test
+                  <?php
+                    foreach ($commande['articles'] as $article) {
+                    $prixHT += $article->article_prix;
+                    }
+                    $TVA = ($prixHT*$tva);
+                    $prixTTC  = $prixHT + $TVA;
+                    echo $prixTTC;
+                  ?>
                 </div>
                 <div class="col-xs-1">
                   Adresse :
                 </div>
                 <div class="col-xs-5">
-                  test
+                  <?=$commande['user']->user_adresse?>
                 </div>
                 <div class="col-xs-1">
                   Article :
                 </div>
                 <div class="col-xs-5">
-                  test
+                  <ul>
+                  <?php foreach ($commande['articles'] as $article): ?>
+                  <?= "<li>" . $article->article_nom . "</li>"?>
+                  </br>
+                  <?php endforeach; ?>
+                </ul>
                 </div>
               </div>
             </div>
           </div>
-
-      <?php foreach ($commande['articles'] as $article): ?>
-      <?= $article->article_nom?>
-      </br>
-      <?php endforeach; ?>
         </li>
+        <?php $prixHT=0; ?>
       <?php endforeach; ?>
 
     </ul>

@@ -1,12 +1,11 @@
 <?php ob_start(); ?>
 <fieldset>
     <!-- Form Name -->
+    <?= $ERROR["UPDATED"]; ?>
+    <?= $SUCCES["UPDATED"]; ?>
     <legend><h1>Edition article</h1></legend>
     <form class="form-horizontal" action="edit_article" method="post">
         <!-- Text input-->
-
-        <?= $ERROR["UPDATED"]; ?>
-        <?= $SUCCES["UPDATED"]; ?>
         <input type="text" hidden name="defaultid" value="<?= $article->article_id ?>">
         <input type="text" hidden name="defaultisbn" value="<?= $article->article_isbn ?>">
         <div class="form-group">
