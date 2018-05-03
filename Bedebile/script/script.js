@@ -43,7 +43,7 @@ $(document).ready(function() {
 /*infobulle*/
 $(function(){
 
-    $("a.infobulle").mouseover(function(){
+    $("a.articleInfo").mouseover(function(){
         if($(this).attr("title")=="") return false;
 
         $("body").append('<span class="infobulle"></span>');
@@ -54,18 +54,17 @@ $(function(){
         var posLeft = $(this).offset().left+$(this).width()/2-bulle.width()/2;
         bulle.css({
             left:posLeft,
-            top:posTop-20,
+            top:posTop-200,
             opacity:0
         });
         bulle.animate({
-            top:posTop-10,
+            top:posTop -10,
             opacity:0.99
         });
     });
 
-    $("a.infobulle").mouseout(function(){
+    $("a.articleInfo").mouseout(function(){
         var bulle = $(".infobulle:last");
-        console.log(bulle.text());
         //$(this).attr("title",bulle.text());
         bulle.animate(
             {

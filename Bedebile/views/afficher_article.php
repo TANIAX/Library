@@ -53,11 +53,10 @@ $categorie = '';
                             <p class="isbn"><?= '<strong>ISBN : </strong>' . $article->article_isbn ?></p><?php
                         } ?>
                         <p class="genre"><strong>Genre : </strong><?= $categorie ?></p>
-                        <a href = "#" title="<?=$article->article_description?>" class="btn btn-info infobulle" role="button">Plus d'info</a>
+                        <a href = "#" title="<?=$article->article_description?>" class="btn btn-info articleInfo" role="button">Plus d'info</a>
                         <?php if (!empty($_SESSION['login'])): ?>
                             <a href="addpanier?article_id=<?= $article->article_id ?>"class="btn btn-warning add addPanier" role="button">Ajouter au panier</a>
                         <?php endif; ?>
-
                         <?php if (isset($_SESSION['role'])) {
                             if ($_SESSION['role'] == 1){ ?>
                             <p class="editer">
