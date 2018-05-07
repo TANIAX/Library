@@ -3,15 +3,15 @@ Cours de projet web
 
 * git clone https://github.com/TANIAX/Library
 
-*Editer le fichier models/db.php. Modifier le login/pass pour la connexion à la db en ligne 5 (par défaut: login: 'root', password: '').
+* Editer le fichier models/db.php. Modifier le login/pass pour la connexion à la db en ligne 5 (par défaut: login: 'root', password: '').
 
-*importer le dump qui se trouve à la racine du répertoire (bedebile sql.sql).
+* importer le dump qui se trouve à la racine du répertoire (bedebile sql.sql).
 
-*Créer un nouveau host dans /etc/hosts.
+* Créer un nouveau host dans /etc/hosts.
 ```
 127.0.0.1 projet.local
 ```
-*Créer un vhost pour votre projet.
+* Créer un vhost pour votre projet.
 ```
 ##### 
 ## monprojet.local 
@@ -30,11 +30,11 @@ DocumentRoot C:/wamp/www/monprojet/
 ServerName monprojet.local
 </VirtualHost>
 ```
-##User de test 'Admin':
+## User de test 'Admin':
 
-*login: toto
-*password: tata
-##User de test 'Client':
+* login: toto
+* password: tata
+## User de test 'Client':
 
-*login: tata
-*password: tata
+* login: tata
+* password: tata
