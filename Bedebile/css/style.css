@@ -753,9 +753,9 @@
 
 /*TEST*/
 .infobulle{
+        /*Position en absolute pour que l'on puisse placer l'infobulle ou on veux a partie du bouton*/
         position:absolute;
         background:#31B0D5;
-        /* padding:6.5px 7px; */
         border-radius: 5px 5px 5px 5px;
         color:#d4d4d4;
         text-align:center;
